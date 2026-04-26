@@ -1,0 +1,1331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aletheai — Decision Intelligence for Real Estate</title>
+<meta name="description" content="Aletheai turns your CRM data into clear, explainable actions so estate agents stop guessing and start converting. Built to work with Alto." />
+<meta name="theme-color" content="#0B0E14" />
+<meta property="og:title" content="Aletheai — Know who to act on next, and why" />
+<meta property="og:description" content="Decision intelligence infrastructure for estate agencies. Explainable. Defensible. Built to work with Alto." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.aletheai.ai" />
+<link rel="icon" type="image/png" href="./aletheai-logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     ALETHEAI DESIGN TOKENS (per Brand Guidelines V1)
+     ============================================================ */
+  :root {
+    /* Brand — Aletheai Purple */
+    --brand-50:  #F1EAFF;
+    --brand-100: #E3D7FF;
+    --brand-200: #C6B0FF;
+    --brand-300: #AA8AFF;
+    --brand-400: #8F66FF;
+    --brand-500: #7B4EFF;
+    --brand-600: #6A3BF0;
+    --brand-700: #5829E0;
+    --brand-800: #481CCB;
+    --brand-900: #3A16A8;
+
+    /* Accents */
+    --cyan-500:    #22D3EE;
+    --cyan-400:    #45D4F2;
+    --fuchsia-500: #E879F9;
+
+    /* Neutrals (Dark UI) */
+    --bg-0:    #0B0E14;
+    --bg-1:    #101323;
+    --surface: #14182A;
+    --surface-2: #1A1F36;
+    --border:  #1E2233;
+    --border-strong: #2A3149;
+
+    --text-1: #E7E9F4;
+    --text-2: #B4B9C7;
+    --text-3: #7A8194;
+    --disabled: #555B6F;
+
+    /* Semantic */
+    --success: #22C55E;
+    --warning: #F59E0B;
+    --error:   #EF4444;
+    --info:    #38BDF8;
+
+    /* Gradients */
+    --aurora:    linear-gradient(135deg, #8F66FF 0%, #22D3EE 100%);
+    --aurora-3:  linear-gradient(135deg, #8F66FF 0%, #E879F9 50%, #22D3EE 100%);
+    --core-glow: radial-gradient(60% 60% at 50% 0%, rgba(123,78,255,0.20) 0%, rgba(34,211,238,0.05) 40%, rgba(11,14,20,0) 70%);
+
+    /* Radii */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+
+    /* Shadows */
+    --shadow-s: 0 1px 2px rgba(0,0,0,0.25);
+    --shadow-m: 0 6px 16px rgba(0,0,0,0.35);
+    --shadow-l: 0 18px 48px rgba(0,0,0,0.45);
+    --shadow-glow: 0 0 60px rgba(123,78,255,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--text-1);
+    background: var(--bg-0);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* Layout */
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+  section { padding: 110px 0; position: relative; }
+  @media (max-width: 720px) { section { padding: 72px 0; } }
+
+  /* Type */
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--text-1);
+    margin: 0;
+  }
+  h1 { font-size: clamp(40px, 6vw, 64px); line-height: 1.05; letter-spacing: -0.035em; font-weight: 700; }
+  h2 { font-size: clamp(28px, 4vw, 44px); line-height: 1.1; letter-spacing: -0.03em; }
+  h3 { font-size: 20px; line-height: 1.3; font-weight: 600; }
+  p  { color: var(--text-2); margin: 0; font-size: 16px; }
+  .num, .tabular { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-2);
+    padding: 6px 12px; border: 1px solid var(--border);
+    border-radius: 999px; background: rgba(123,78,255,0.06);
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--cyan-500);
+    box-shadow: 0 0 0 4px rgba(34,211,238,0.15), 0 0 12px rgba(34,211,238,0.6);
+  }
+  .grad-text {
+    background: var(--aurora);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .serif { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 22px; border-radius: 999px; font-weight: 500; font-size: 14px;
+    transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    border: 1px solid transparent; cursor: pointer; white-space: nowrap;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--brand-500); color: #fff;
+    box-shadow: 0 4px 14px rgba(123,78,255,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    background: var(--brand-400);
+    box-shadow: 0 8px 24px rgba(123,78,255,0.45), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+  .btn-secondary {
+    background: rgba(255,255,255,0.04); color: var(--text-1);
+    border-color: var(--border-strong);
+  }
+  .btn-secondary:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: var(--brand-400);
+  }
+  .btn-ghost { background: transparent; color: var(--text-1); }
+  .btn-ghost:hover { color: var(--brand-400); }
+  .arrow { transition: transform .2s ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  /* Focus ring (per brand) */
+  .btn:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible {
+    outline: 2px solid var(--cyan-400);
+    outline-offset: 2px;
+  }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(180%) blur(14px);
+    background: rgba(11,14,20,0.72);
+    border-bottom: 1px solid transparent;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .nav.scrolled {
+    border-bottom-color: var(--border);
+    background: rgba(11,14,20,0.92);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .logo {
+    display: flex; align-items: center;
+    height: 36px;
+  }
+  .logo img {
+    height: 32px; width: auto;
+    display: block;
+  }
+  .nav-links { display: flex; gap: 28px; align-items: center; }
+  .nav-links a { color: var(--text-2); font-size: 14px; transition: color .15s ease; }
+  .nav-links a:hover { color: var(--text-1); }
+  @media (max-width: 820px) { .nav-links { display: none; } }
+
+  /* Hero */
+  .hero { padding-top: 80px; padding-bottom: 80px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--core-glow);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 60%);
+    pointer-events: none;
+    border-radius: 50%;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  @media (max-width: 980px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+  .hero p.lead {
+    font-size: 19px; line-height: 1.55;
+    max-width: 540px; margin-top: 22px;
+    color: var(--text-2);
+  }
+  .hero-ctas { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .hero-trust {
+    display: flex; align-items: center; gap: 14px; margin-top: 32px;
+    color: var(--text-3); font-size: 13px; flex-wrap: wrap;
+  }
+  .hero-trust .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--border-strong); padding: 6px 12px;
+    border-radius: 999px; background: var(--surface); color: var(--text-1);
+  }
+
+  /* Dashboard mockup (Lead Row pattern) */
+  .dash {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-l), var(--shadow-glow);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .dash::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(123,78,255,0.08), transparent 50%);
+    pointer-events: none; border-radius: inherit;
+  }
+  .dash-inner { position: relative; z-index: 1; }
+  .dash-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 6px 16px; border-bottom: 1px solid var(--border);
+  }
+  .dash-head .title { font-weight: 600; font-size: 14px; color: var(--text-1); }
+  .dash-head .meta { font-size: 12px; color: var(--text-3); }
+  .lead-row {
+    display: grid;
+    grid-template-columns: 6px 1fr auto auto;
+    gap: 14px; align-items: center;
+    padding: 16px 6px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .lead-row:last-child { border-bottom: 0; }
+  .lead-bar {
+    width: 4px; height: 40px; border-radius: 2px;
+    background: var(--brand-500);
+  }
+  .lead-row.warm .lead-bar { background: var(--cyan-500); }
+  .lead-row.cool .lead-bar { background: var(--text-3); }
+  .lead-name { font-size: 14px; font-weight: 500; color: var(--text-1); }
+  .lead-why { font-size: 12px; color: var(--text-3); margin-top: 4px; line-height: 1.4; }
+  .score {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600; font-size: 13px;
+    padding: 6px 11px; border-radius: 999px;
+    background: var(--brand-600); color: #fff;
+    box-shadow: 0 2px 8px rgba(123,78,255,0.4);
+  }
+  .score.warm { background: rgba(34,211,238,0.15); color: var(--cyan-500); box-shadow: none; border: 1px solid rgba(34,211,238,0.3); }
+  .score.cool { background: rgba(255,255,255,0.05); color: var(--text-2); box-shadow: none; border: 1px solid var(--border-strong); }
+  .chip {
+    font-size: 11px; padding: 5px 10px; border-radius: 999px;
+    background: rgba(123,78,255,0.12); color: var(--brand-300);
+    border: 1px solid rgba(123,78,255,0.2);
+    white-space: nowrap; font-weight: 500;
+  }
+  .chip.cyan { background: rgba(34,211,238,0.10); color: var(--cyan-500); border-color: rgba(34,211,238,0.2); }
+  .chip.neutral { background: rgba(255,255,255,0.04); color: var(--text-3); border-color: var(--border); }
+
+  /* Strip */
+  .strip {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0; background: var(--bg-1);
+  }
+  .strip-inner {
+    display: flex; align-items: center; justify-content: center; gap: 36px; flex-wrap: wrap;
+    color: var(--text-3); font-size: 13px; text-align: center;
+  }
+  .strip-inner b { color: var(--text-1); font-weight: 600; }
+
+  /* Section heads */
+  .section-head { max-width: 760px; margin: 0 auto 60px; text-align: center; }
+  .section-head .eyebrow { margin-bottom: 18px; }
+  .section-head p { margin-top: 16px; font-size: 18px; }
+
+  /* Problem grid */
+  .problem .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+  @media (max-width: 820px) { .problem .grid { grid-template-columns: 1fr; } }
+  .gap-card {
+    border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px;
+    background: var(--surface); transition: border-color .2s ease, transform .2s ease;
+  }
+  .gap-card:hover {
+    border-color: var(--brand-700);
+    transform: translateY(-2px);
+  }
+  .gap-card .num-big {
+    font-family: 'Instrument Serif', serif; font-size: 32px;
+    background: var(--aurora); -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-style: italic;
+  }
+  .gap-card h3 { margin-top: 8px; }
+  .gap-card p { margin-top: 10px; font-size: 15px; }
+
+  /* Solution band */
+  .solution-band {
+    background: var(--bg-1);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+  @media (max-width: 820px) { .steps { grid-template-columns: 1fr; } }
+  .step {
+    border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px;
+    background: var(--surface); position: relative;
+  }
+  .step .badge {
+    width: 32px; height: 32px; border-radius: var(--radius-sm);
+    background: var(--brand-500); color: #fff;
+    display: grid; place-items: center;
+    font-size: 13px; font-weight: 600;
+    box-shadow: 0 4px 12px rgba(123,78,255,0.35);
+  }
+  .step h3 { margin-top: 18px; }
+  .step p { margin-top: 8px; font-size: 15px; }
+
+  /* How it works (architecture) */
+  .arch {
+    margin-top: 48px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+  }
+  @media (max-width: 980px) { .arch { grid-template-columns: 1fr; } }
+  .arch-list { list-style: none; padding: 0; margin: 0; }
+  .arch-list li { display: flex; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .arch-list li:last-child { border-bottom: 0; }
+  .arch-list .ic {
+    width: 32px; height: 32px; border-radius: var(--radius-sm);
+    background: rgba(123,78,255,0.12);
+    color: var(--brand-300);
+    display: grid; place-items: center;
+    flex-shrink: 0; font-weight: 600; font-size: 13px;
+    border: 1px solid rgba(123,78,255,0.2);
+  }
+  .arch-list b { color: var(--text-1); font-weight: 600; display: block; margin-bottom: 4px; }
+  .arch-list span.copy { color: var(--text-2); font-size: 15px; }
+
+  .flow-card {
+    border: 1px solid var(--border); border-radius: var(--radius-2xl);
+    padding: 32px; background: var(--surface);
+    box-shadow: var(--shadow-m);
+    position: relative; overflow: hidden;
+  }
+  .flow-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: var(--aurora);
+  }
+  .flow {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .node {
+    flex: 1; padding: 18px 12px; border: 1px solid var(--border-strong); border-radius: var(--radius-md);
+    background: var(--bg-1); text-align: center;
+  }
+  .node b { font-size: 13px; color: var(--text-1); display: block; }
+  .node small { display: block; color: var(--text-3); font-size: 11px; margin-top: 4px; }
+  .arrow-h { color: var(--brand-400); font-size: 20px; flex-shrink: 0; }
+  .flow-tag {
+    margin-top: 22px; padding-top: 22px; border-top: 1px dashed var(--border-strong);
+    font-size: 13px; color: var(--text-2); line-height: 1.5;
+  }
+  .flow-tag b { color: var(--text-1); }
+
+  /* ROI */
+  .roi { background: var(--bg-1); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+  .roi::before {
+    content: ''; position: absolute; bottom: -300px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(123,78,255,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .roi .container { position: relative; z-index: 1; }
+  .metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+  @media (max-width: 820px) { .metrics { grid-template-columns: 1fr; } }
+  .metric {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+    padding: 32px 28px;
+  }
+  .metric .num-big {
+    font-size: 56px; font-weight: 700; letter-spacing: -0.04em; line-height: 1;
+    background: var(--aurora);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .metric h4 { margin-top: 16px; font-size: 16px; font-weight: 600; color: var(--text-1); }
+  .metric p { margin-top: 6px; font-size: 14px; color: var(--text-2); }
+  .roi-line {
+    text-align: center; margin-top: 56px;
+    max-width: 720px; margin-left: auto; margin-right: auto;
+  }
+  .roi-line .quote {
+    font-family: 'Instrument Serif', serif;
+    font-size: 26px; font-style: italic;
+    color: var(--text-1);
+  }
+
+  /* Tiers */
+  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; align-items: stretch; }
+  @media (max-width: 980px) { .tiers { grid-template-columns: 1fr; } }
+  .tier {
+    border: 1px solid var(--border); border-radius: var(--radius-2xl); padding: 32px;
+    background: var(--surface); display: flex; flex-direction: column;
+    transition: border-color .2s ease, transform .2s ease;
+    position: relative;
+  }
+  .tier:hover { border-color: var(--brand-700); }
+  .tier.featured {
+    border-color: transparent;
+    background: linear-gradient(135deg, rgba(123,78,255,0.10), rgba(34,211,238,0.04)), var(--surface);
+    transform: scale(1.02);
+    box-shadow: var(--shadow-m), 0 0 40px rgba(123,78,255,0.15);
+  }
+  .tier.featured::before {
+    content: ''; position: absolute; inset: 0;
+    border-radius: inherit; padding: 1px;
+    background: var(--aurora);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude;
+    pointer-events: none;
+  }
+  .tier .ribbon {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--aurora);
+    color: #fff; font-size: 11px;
+    padding: 5px 14px; border-radius: 999px;
+    font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(123,78,255,0.4);
+  }
+  .price-name {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-3); font-weight: 500;
+  }
+  .tier h3 { margin-top: 8px; font-size: 24px; }
+  .tier .desc { margin-top: 10px; font-size: 14px; color: var(--text-2); }
+  .tier ul { list-style: none; padding: 0; margin: 24px 0 0; flex: 1; }
+  .tier li {
+    padding: 12px 0; font-size: 14px; color: var(--text-2);
+    display: flex; gap: 10px; align-items: flex-start;
+    border-top: 1px solid var(--border);
+  }
+  .tier li:first-child { border-top: 0; }
+  .check {
+    width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px;
+    color: var(--cyan-500);
+  }
+  .tier.featured .check { color: var(--brand-400); }
+
+  /* Copilot */
+  .copilot-wrap { padding: 60px 0; }
+  .copilot {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 32px;
+    margin: 0 auto;
+    max-width: 1200px;
+    overflow: hidden; position: relative;
+  }
+  .copilot::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(40% 60% at 80% 30%, rgba(123,78,255,0.18), transparent 70%),
+      radial-gradient(40% 60% at 20% 80%, rgba(34,211,238,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .copilot::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: var(--aurora);
+  }
+  .copilot-inner {
+    position: relative; padding: 88px 56px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+  }
+  @media (max-width: 980px) {
+    .copilot-inner { grid-template-columns: 1fr; padding: 56px 28px; gap: 36px; }
+    .copilot-wrap { padding: 32px 16px; }
+  }
+  .copilot p { color: var(--text-2); font-size: 17px; margin-top: 18px; }
+  .copilot-list { list-style: none; padding: 0; margin: 24px 0 0; }
+  .copilot-list li {
+    padding: 10px 0; color: var(--text-2); font-size: 15px;
+    display: flex; gap: 12px;
+  }
+  .copilot-list .dot { color: var(--cyan-500); font-size: 10px; line-height: 1.6; flex-shrink: 0; }
+
+  .chat {
+    background: rgba(11,14,20,0.6);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    backdrop-filter: blur(10px);
+  }
+  .msg { padding: 12px 14px; border-radius: var(--radius-md); font-size: 14px; max-width: 88%; line-height: 1.5; }
+  .msg.user {
+    background: rgba(255,255,255,0.04); color: var(--text-1);
+    margin-left: auto; border: 1px solid var(--border-strong);
+  }
+  .msg.ai {
+    background: linear-gradient(135deg, rgba(123,78,255,0.18), rgba(34,211,238,0.08));
+    color: var(--text-1);
+    border: 1px solid rgba(123,78,255,0.28);
+    margin-top: 12px;
+  }
+  .msg-meta {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px; color: var(--text-3);
+    margin-bottom: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .msg-why {
+    color: var(--text-3); font-size: 12px; margin-top: 8px;
+    padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Pilot */
+  .pilot-card {
+    border-radius: 32px; padding: 64px;
+    background: linear-gradient(135deg, rgba(123,78,255,0.06), transparent 60%), var(--surface);
+    border: 1px solid var(--border);
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .pilot-card::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(34,211,238,0.10), transparent 60%);
+    pointer-events: none;
+  }
+  @media (max-width: 980px) { .pilot-card { grid-template-columns: 1fr; padding: 40px 28px; } }
+  .pilot-points { list-style: none; padding: 0; margin: 24px 0 0; position: relative; }
+  .pilot-points li {
+    padding: 14px 0; border-top: 1px solid var(--border);
+    font-size: 15px; color: var(--text-2);
+    display: flex; gap: 12px;
+  }
+  .pilot-points li:first-child { border-top: 0; }
+  .pilot-points .step-num {
+    font-family: 'Instrument Serif', serif;
+    background: var(--aurora); -webkit-background-clip: text; background-clip: text; color: transparent;
+    font-size: 22px; font-style: italic;
+    width: 28px; flex-shrink: 0;
+  }
+  .pilot-badge {
+    display: inline-block; padding: 36px;
+    background: var(--bg-1);
+    border: 1px solid var(--border-strong); border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-m);
+    position: relative; z-index: 1;
+  }
+  .pilot-badge .num-big {
+    font-family: 'Instrument Serif', serif; font-style: italic;
+    font-size: 72px; line-height: 1;
+    background: var(--aurora); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .pilot-badge .label {
+    font-size: 11px; color: var(--text-3);
+    letter-spacing: 0.16em; text-transform: uppercase; margin-top: 12px;
+  }
+
+  /* Integration */
+  .integ {
+    text-align: center; padding: 80px 0;
+    background: var(--bg-1);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .integ::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(60% 80% at 50% 100%, rgba(123,78,255,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .integ .container { position: relative; z-index: 1; }
+  .integ-logos {
+    display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .integ-pill {
+    display: inline-flex; align-items: center; gap: 12px; padding: 14px 24px;
+    background: var(--surface); border: 1px solid var(--border-strong);
+    border-radius: 999px; font-weight: 600; letter-spacing: -0.01em;
+    box-shadow: var(--shadow-s); color: var(--text-1);
+  }
+  .integ-pill img { height: 24px; width: auto; }
+  .integ-link {
+    color: var(--brand-400); font-size: 24px;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  /* Trust */
+  .trust .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+  @media (max-width: 820px) { .trust .grid { grid-template-columns: 1fr; } }
+  .trust-card {
+    border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px;
+    background: var(--surface);
+  }
+  .trust-card .ic {
+    width: 40px; height: 40px; border-radius: var(--radius-sm);
+    background: rgba(123,78,255,0.12); color: var(--brand-300);
+    display: grid; place-items: center;
+    border: 1px solid rgba(123,78,255,0.2);
+  }
+  .trust-card h3 { margin-top: 18px; }
+  .trust-card p { margin-top: 10px; font-size: 15px; }
+
+  /* Final CTA */
+  .final {
+    text-align: center; padding: 140px 0;
+    background:
+      radial-gradient(70% 100% at 50% 0%, rgba(123,78,255,0.18), transparent 60%),
+      radial-gradient(50% 80% at 50% 100%, rgba(34,211,238,0.08), transparent 60%),
+      var(--bg-0);
+    border-top: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .final h2 { font-size: clamp(34px, 5vw, 56px); }
+  .final .ctas {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; margin-top: 32px;
+  }
+
+  /* Footer */
+  footer { padding: 48px 0; border-top: 1px solid var(--border); background: var(--bg-0); }
+  .foot-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .foot-inner small { color: var(--text-3); font-size: 13px; }
+  .foot-links { display: flex; gap: 22px; font-size: 13px; color: var(--text-3); }
+  .foot-links a { transition: color .15s ease; }
+  .foot-links a:hover { color: var(--text-1); }
+
+  /* Modal */
+  .modal-bg {
+    position: fixed; inset: 0;
+    background: rgba(11,14,20,0.7); backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center;
+    z-index: 100; padding: 24px;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 24px;
+    max-width: 480px; width: 100%;
+    padding: 36px; position: relative;
+    box-shadow: var(--shadow-l), 0 0 80px rgba(123,78,255,0.2);
+  }
+  .modal h3 { font-size: 24px; }
+  .modal p { margin-top: 8px; font-size: 15px; color: var(--text-2); }
+  .modal form { margin-top: 22px; display: grid; gap: 12px; }
+  .modal input, .modal select, .modal textarea {
+    width: 100%; padding: 12px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    font-family: inherit; font-size: 14px;
+    background: var(--bg-1); color: var(--text-1);
+  }
+  .modal input::placeholder, .modal textarea::placeholder { color: var(--text-3); }
+  .modal input:focus, .modal select:focus, .modal textarea:focus {
+    outline: none; border-color: var(--brand-500);
+    box-shadow: 0 0 0 3px rgba(123,78,255,0.2);
+  }
+  .modal textarea { min-height: 90px; resize: vertical; }
+  .modal .close {
+    position: absolute; top: 14px; right: 14px;
+    background: transparent; border: 0;
+    width: 32px; height: 32px; border-radius: var(--radius-sm);
+    cursor: pointer; color: var(--text-3);
+    display: grid; place-items: center; font-size: 22px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .modal .close:hover { background: rgba(255,255,255,0.05); color: var(--text-1); }
+  .modal-success { text-align: center; padding: 16px 0; }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="logo" aria-label="Aletheai home">
+      <img src="./aletheai-logo.png" alt="Aletheai" />
+    </a>
+    <nav class="nav-links">
+      <a href="#solution">Solution</a>
+      <a href="#how">How it works</a>
+      <a href="#roi">ROI</a>
+      <a href="#features">Plans</a>
+      <a href="#pilot">Pilot</a>
+    </nav>
+    <a href="#" class="btn btn-primary" data-open-modal="demo">
+      Request a demo <span class="arrow">→</span>
+    </a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow"><span class="dot"></span> Decision intelligence for real estate</span>
+      <h1 style="margin-top: 22px;">
+        Know who to act on next — <span class="grad-text">and why.</span>
+      </h1>
+      <p class="lead">
+        Aletheai turns your CRM data into clear, explainable actions so your agents stop guessing and start converting.
+      </p>
+      <div class="hero-ctas">
+        <a href="#" class="btn btn-primary" data-open-modal="demo">Request a demo <span class="arrow">→</span></a>
+        <a href="#" class="btn btn-secondary" data-open-modal="pilot">Join pilot</a>
+      </div>
+      <div class="hero-trust">
+        <span class="pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+          Built to work with Alto
+        </span>
+        <span>Explainable. Defensible. Production-ready.</span>
+      </div>
+    </div>
+
+    <div class="reveal dash" aria-hidden="true">
+      <div class="dash-inner">
+        <div class="dash-head">
+          <div>
+            <div class="title">Today's priority leads</div>
+            <div class="meta mono">5 of 142 contacts · updated just now</div>
+          </div>
+          <span class="chip cyan">● Live</span>
+        </div>
+
+        <div class="lead-row">
+          <div class="lead-bar"></div>
+          <div>
+            <div class="lead-name">Jordan M. · Camden 2-bed</div>
+            <div class="lead-why">Returned to listing 3× in 24h · viewing booked but unconfirmed</div>
+          </div>
+          <span class="chip">Re-engage</span>
+          <span class="score">94</span>
+        </div>
+
+        <div class="lead-row">
+          <div class="lead-bar"></div>
+          <div>
+            <div class="lead-name">Sarah P. · Islington flat</div>
+            <div class="lead-why">Mortgage AIP just received · likely to move on best-fit listings</div>
+          </div>
+          <span class="chip">Send shortlist</span>
+          <span class="score">91</span>
+        </div>
+
+        <div class="lead-row warm">
+          <div class="lead-bar"></div>
+          <div>
+            <div class="lead-name">Rohan A. · Hackney studio</div>
+            <div class="lead-why">Email opened 4× · no callback in 6 days</div>
+          </div>
+          <span class="chip cyan">Call today</span>
+          <span class="score warm">87</span>
+        </div>
+
+        <div class="lead-row warm">
+          <div class="lead-bar"></div>
+          <div>
+            <div class="lead-name">Emma C. · Stoke Newington</div>
+            <div class="lead-why">Switched browse criteria upward · budget signal up</div>
+          </div>
+          <span class="chip cyan">Reframe budget</span>
+          <span class="score warm">82</span>
+        </div>
+
+        <div class="lead-row cool">
+          <div class="lead-bar"></div>
+          <div>
+            <div class="lead-name">David K. · Walthamstow</div>
+            <div class="lead-why">Saved property 9 days ago · went quiet · price drop matches</div>
+          </div>
+          <span class="chip neutral">Notify of drop</span>
+          <span class="score cool">78</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Strip -->
+<div class="strip">
+  <div class="container strip-inner">
+    <span>Integrated with <b>Alto</b> · Built for UK estate agencies · Pilot-ready in 6–8 weeks</span>
+  </div>
+</div>
+
+<!-- Problem -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The real problem</span>
+      <h2>Most agents aren't losing deals from lack of effort.</h2>
+      <p>They're losing them in the gaps. CRMs store data — they don't tell you what to do.</p>
+    </div>
+
+    <div class="grid">
+      <div class="gap-card reveal">
+        <div class="num-big">01</div>
+        <h3>Calling the wrong leads</h3>
+        <p>Volume is high, signal is low. Agents prioritise by gut, not behaviour — and the warmest opportunities go cold while colder ones get the call.</p>
+      </div>
+      <div class="gap-card reveal">
+        <div class="num-big">02</div>
+        <h3>Missing the right moment</h3>
+        <p>The window between "interested" and "ready" is short and quiet. By the time someone asks again, another agency already replied.</p>
+      </div>
+      <div class="gap-card reveal">
+        <div class="num-big">03</div>
+        <h3>Not knowing what to say</h3>
+        <p>Even with the right lead at the right time, the wrong opener kills the conversation. Agents need talk tracks tied to the actual signal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution -->
+<section id="solution" class="solution-band">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">The solution</span>
+      <h2>A new layer between data and action.</h2>
+      <p>Aletheai sits on top of your CRM and turns raw data into a prioritised, explainable action queue.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="badge">1</div>
+        <h3>Prioritise</h3>
+        <p>We analyse behavioural signals across your CRM to identify which leads matter <em>now</em> — not which were created most recently.</p>
+      </div>
+      <div class="step reveal">
+        <div class="badge">2</div>
+        <h3>Explain</h3>
+        <p>Every recommendation comes with clear reasoning. No black box. Agents see exactly why a lead is on top — and trust the call.</p>
+      </div>
+      <div class="step reveal">
+        <div class="badge">3</div>
+        <h3>Recommend</h3>
+        <p>Agents get the exact next step and a talk track tuned to the signal — opener, framing, and the right ask.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">How it works</span>
+      <h2>Not black-box AI. <span class="serif">A structured behavioural engine.</span></h2>
+      <p>Aletheai reflects how people actually make decisions — observable behaviour, structured logic, transparent reasoning at every step.</p>
+    </div>
+
+    <div class="arch">
+      <ul class="arch-list reveal">
+        <li>
+          <span class="ic">S</span>
+          <div>
+            <b>Signals</b>
+            <span class="copy">Browsing patterns, returns to listings, AIP timing, communication cadence, market shifts — the observable behaviour your CRM already captures but doesn't act on.</span>
+          </div>
+        </li>
+        <li>
+          <span class="ic">B</span>
+          <div>
+            <b>Behaviour patterns</b>
+            <span class="copy">Signals are interpreted as patterns: re-engagement, budget shift, intent decay, readiness escalation. Each pattern has a known meaning, not a probability score.</span>
+          </div>
+        </li>
+        <li>
+          <span class="ic">D</span>
+          <div>
+            <b>Decision logic</b>
+            <span class="copy">Patterns trigger structured decision rules — explainable, auditable, and tunable. The output is a ranked action list with a clear "why" for every entry.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="flow-card reveal">
+        <div class="flow">
+          <div class="node"><b>Signals</b><small>Observable behaviour</small></div>
+          <span class="arrow-h">→</span>
+          <div class="node"><b>Patterns</b><small>Interpretation</small></div>
+          <span class="arrow-h">→</span>
+          <div class="node"><b>Decisions</b><small>Action + reason</small></div>
+        </div>
+        <div class="flow-tag">
+          <b>Why this matters:</b> every decision is traceable back to a behaviour. If an agent or manager asks <em>"why this lead?"</em> — there's an answer, not a confidence percentage.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI -->
+<section class="roi" id="roi">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Measurable impact</span>
+      <h2>See the impact as you use it.</h2>
+      <p>Your own data, your own outcomes — measured continuously and surfaced in plain language.</p>
+    </div>
+
+    <div class="metrics">
+      <div class="metric reveal">
+        <div class="num-big">−27%</div>
+        <h4>Fewer low-value follow-ups</h4>
+        <p>Time reclaimed from leads that wouldn't have converted, redirected to the ones that will.</p>
+      </div>
+      <div class="metric reveal">
+        <div class="num-big">82%</div>
+        <h4>Of actions guided by Aletheai</h4>
+        <p>Agents adopt the recommended action queue as their default daily workflow.</p>
+      </div>
+      <div class="metric reveal">
+        <div class="num-big">1.6×</div>
+        <h4>Faster conversion on priority leads</h4>
+        <p>High-priority recommendations close meaningfully faster than baseline pipeline.</p>
+      </div>
+    </div>
+
+    <div class="roi-line reveal">
+      <p class="quote">"We don't ask agencies to believe us — we show them their own impact."</p>
+    </div>
+  </div>
+</section>
+
+<!-- Tiers -->
+<section id="features">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Plans</span>
+      <h2>Designed for how agencies actually scale.</h2>
+      <p>Start with the essentials. Move up as your team and intelligence needs grow.</p>
+    </div>
+
+    <div class="tiers">
+      <div class="tier reveal">
+        <span class="price-name">Starter</span>
+        <h3>Get the priority signal</h3>
+        <p class="desc">For single-branch agencies running their first decision-intelligence loop.</p>
+        <ul>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Top 5 priority leads, daily</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Core behavioural signals</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Basic recommendations</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Alto integration</li>
+        </ul>
+        <a href="#" class="btn btn-secondary" style="margin-top: 28px;" data-open-modal="demo">See a demo</a>
+      </div>
+
+      <div class="tier featured reveal">
+        <span class="ribbon">Most popular</span>
+        <span class="price-name">Growth</span>
+        <h3>Full prioritisation engine</h3>
+        <p class="desc">For agencies operating at pace, with multi-agent teams and live pipelines.</p>
+        <ul>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Full prioritisation across pipeline</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> "What changed" insights</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Talk tracks per signal</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Copilot for daily use</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Manager visibility dashboard</li>
+        </ul>
+        <a href="#" class="btn btn-primary" style="margin-top: 28px;" data-open-modal="demo">Request a demo →</a>
+      </div>
+
+      <div class="tier reveal">
+        <span class="price-name">Pro</span>
+        <h3>Network-grade intelligence</h3>
+        <p class="desc">For multi-branch groups and enterprise rollouts that need cross-branch view.</p>
+        <ul>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Cross-branch intelligence</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Behaviour tracking at scale</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> External data signals</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Custom decision logic</li>
+          <li><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg> Dedicated success partner</li>
+        </ul>
+        <a href="#" class="btn btn-secondary" style="margin-top: 28px;" data-open-modal="demo">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Copilot -->
+<div class="copilot-wrap">
+  <div class="copilot">
+    <div class="copilot-inner">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span> Aletheai Copilot</span>
+        <h2 style="margin-top: 22px;">Know what to say — every time.</h2>
+        <p>Aletheai Copilot helps agents handle the moment in front of them: open the conversation, handle the objection, take the right next step.</p>
+        <ul class="copilot-list">
+          <li><span class="dot">●</span> Smart conversation openers tied to the signal</li>
+          <li><span class="dot">●</span> Live objection handling with context</li>
+          <li><span class="dot">●</span> Next-best-action prompts after every interaction</li>
+          <li><span class="dot">●</span> No hard limits — built for daily use, with smart usage scaling</li>
+        </ul>
+      </div>
+
+      <div class="chat reveal">
+        <div class="msg-meta">Agent · Sarah P. · Islington flat</div>
+        <div class="msg user">She just received her AIP. How should I open the call?</div>
+        <div class="msg ai">
+          <strong>Open with the AIP.</strong> Sarah's mortgage approval came through 2 hours ago — she's primed to act. Lead with: <em>"Congrats on the AIP — it actually sharpens what we should look at next. Two listings just came on that fit cleanly."</em>
+          <div class="msg-why">Why: AIP timing + recent re-engagement on Islington 2-bed. Talk track tuned to "ready buyer".</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Pilot -->
+<section id="pilot">
+  <div class="container">
+    <div class="pilot-card reveal">
+      <div>
+        <span class="eyebrow">Pilot programme</span>
+        <h2 style="margin-top: 22px;">Run a live pilot with your team.</h2>
+        <p style="margin-top: 16px; max-width: 480px;">A focused 6–8 week structured pilot on your real data, your real pipeline, and your real outcomes. We don't ask you to take our word for it — the numbers will.</p>
+        <ul class="pilot-points">
+          <li><span class="step-num">i.</span> Set baseline metrics in week 1 (no changes)</li>
+          <li><span class="step-num">ii.</span> Roll out to selected agents from week 2</li>
+          <li><span class="step-num">iii.</span> Weekly impact readouts vs. baseline</li>
+          <li><span class="step-num">iv.</span> Decision point at week 6 — extend, expand, or stop</li>
+        </ul>
+      </div>
+      <div style="text-align: center; position: relative; z-index: 1;">
+        <div class="pilot-badge">
+          <div class="num-big">6–8</div>
+          <div class="label">Week pilot</div>
+          <a href="#" class="btn btn-primary" style="margin-top: 24px; width: 100%;" data-open-modal="pilot">Apply for pilot →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Integration -->
+<section class="integ">
+  <div class="container">
+    <span class="eyebrow">Built for your stack</span>
+    <h2 style="margin-top: 22px;">Built to work with your existing CRM.</h2>
+    <p style="margin-top: 16px; max-width: 620px; margin-left: auto; margin-right: auto;">
+      Aletheai integrates directly with <b style="color: var(--text-1);">Alto</b> — enhancing your workflows without replacing them. Your team keeps their CRM. We add the layer that turns it into action.
+    </p>
+    <div class="integ-logos">
+      <span class="integ-pill">
+        <img src="./aletheai-logo.png" alt="Aletheai" />
+      </span>
+      <span class="integ-link">⇋</span>
+      <span class="integ-pill">
+        <span style="width: 16px; height: 16px; border-radius: 4px; background: linear-gradient(135deg, #ff6b6b, #ffa94d); display: inline-block;"></span>
+        Alto
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- Trust -->
+<section class="trust">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Trust + explainability</span>
+      <h2>Designed for control, not mystery.</h2>
+      <p>If you can't explain a decision, you can't defend it. Aletheai is built so every recommendation can be traced, audited, and trusted.</p>
+    </div>
+
+    <div class="grid">
+      <div class="trust-card reveal">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </div>
+        <h3>Fully explainable decisions</h3>
+        <p>Every recommendation comes with the signal, the pattern, and the logic behind it — surfaced in plain language for the agent.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        </div>
+        <h3>No black-box scoring</h3>
+        <p>Confidence percentages don't help an agent in the moment. Aletheai uses structured logic — what the system saw, what it concluded, why.</p>
+      </div>
+      <div class="trust-card reveal">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l9 4v6c0 5-3.5 9-9 10-5.5-1-9-5-9-10V6l9-4z"/></svg>
+        </div>
+        <h3>Designed for transparency</h3>
+        <p>Managers retain full visibility into the decision logic. Tunable, auditable, and built to fit how your agency already works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final">
+  <div class="container">
+    <span class="eyebrow reveal">Stop guessing</span>
+    <h2 class="reveal" style="margin-top: 22px;">Stop guessing. <span class="serif grad-text">Start acting with clarity.</span></h2>
+    <p class="reveal" style="margin-top: 16px; max-width: 540px; margin-left: auto; margin-right: auto; font-size: 18px;">
+      See what your agents could be doing differently — on your data, this quarter.
+    </p>
+    <div class="ctas reveal">
+      <a href="#" class="btn btn-primary" data-open-modal="demo">Request demo <span class="arrow">→</span></a>
+      <a href="#" class="btn btn-secondary" data-open-modal="pilot">Join pilot</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container foot-inner">
+    <div class="logo">
+      <img src="./aletheai-logo.png" alt="Aletheai" style="height: 28px;" />
+    </div>
+    <div class="foot-links">
+      <a href="mailto:diana@aletheai.ai">diana@aletheai.ai</a>
+      <a href="#solution">Solution</a>
+      <a href="#pilot">Pilot</a>
+      <a href="#features">Plans</a>
+    </div>
+    <small>© 2026 Aletheai · Decision intelligence for real estate</small>
+  </div>
+</footer>
+
+<!-- Modals -->
+<div class="modal-bg" id="modal-demo" data-modal="demo">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="demo-title">
+    <button class="close" data-close-modal aria-label="Close">×</button>
+    <div class="modal-form">
+      <h3 id="demo-title">Request a demo</h3>
+      <p>15-minute walkthrough on your data shape and pipeline. We'll come back within 24 hours.</p>
+      <form id="form-demo" action="https://formspree.io/f/mqewokgr" method="POST">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Work email" required>
+        <input type="text" name="agency" placeholder="Agency name">
+        <select name="size" required>
+          <option value="">Team size</option>
+          <option>1–5 agents</option>
+          <option>6–20 agents</option>
+          <option>21–50 agents</option>
+          <option>50+ agents</option>
+        </select>
+        <textarea name="notes" placeholder="Anything we should know?"></textarea>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Send request →</button>
+      </form>
+    </div>
+    <div class="modal-success" style="display: none;">
+      <h3>Thanks — we'll be in touch.</h3>
+      <p style="margin-top: 12px;">If you'd rather skip the form, email <a href="mailto:diana@aletheai.ai" style="color: var(--brand-400);">diana@aletheai.ai</a> directly.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-pilot" data-modal="pilot">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pilot-title">
+    <button class="close" data-close-modal aria-label="Close">×</button>
+    <div class="modal-form">
+      <h3 id="pilot-title">Apply for pilot</h3>
+      <p>6–8 week structured pilot on your live pipeline. Limited slots per quarter.</p>
+      <form id="form-pilot" action="https://formspree.io/f/mgorberk" method="POST">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Work email" required>
+        <input type="text" name="agency" placeholder="Agency name" required>
+        <select name="crm" required>
+          <option value="">Current CRM</option>
+          <option>Alto</option>
+          <option>Reapit</option>
+          <option>Jupix</option>
+          <option>Other</option>
+        </select>
+        <textarea name="goal" placeholder="What would success look like for you in 8 weeks?"></textarea>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Apply →</button>
+      </form>
+    </div>
+    <div class="modal-success" style="display: none;">
+      <h3>Application received.</h3>
+      <p style="margin-top: 12px;">We review pilot applications weekly and will respond within 5 business days. Questions? <a href="mailto:diana@aletheai.ai" style="color: var(--brand-400);">diana@aletheai.ai</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Sticky nav border on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Modals
+  const openButtons = document.querySelectorAll('[data-open-modal]');
+  const closeButtons = document.querySelectorAll('[data-close-modal]');
+  const modals = document.querySelectorAll('.modal-bg');
+
+  function openModal(name) {
+    const m = document.querySelector(`[data-modal="${name}"]`);
+    if (!m) return;
+    m.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    m.querySelector('.modal-form').style.display = '';
+    m.querySelector('.modal-success').style.display = 'none';
+    const form = m.querySelector('form');
+    if (form) form.reset();
+  }
+  function closeModals() {
+    modals.forEach(m => m.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
+
+  openButtons.forEach(b => b.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal(b.dataset.openModal);
+  }));
+  closeButtons.forEach(b => b.addEventListener('click', closeModals));
+  modals.forEach(m => m.addEventListener('click', (e) => {
+    if (e.target === m) closeModals();
+  }));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModals();
+  });
+
+  // Form submission — Formspree (real backend, posts to diana@aletheai.ai)
+  document.querySelectorAll('.modal form').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const modal = form.closest('.modal');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending…';
+
+      const data = new FormData(form);
+      // Dynamic subject so inbox shows "Pilot application — [Agency]"
+      const dynamicSubject = form.id === 'form-pilot'
+        ? `Pilot application — ${data.get('agency') || data.get('name')}`
+        : `Demo request — ${data.get('agency') || data.get('name')}`;
+      data.set('_subject', dynamicSubject);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          modal.querySelector('.modal-form').style.display = 'none';
+          modal.querySelector('.modal-success').style.display = '';
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        alert('Something went wrong sending the form. Please email diana@aletheai.ai directly.');
+      }
+    });
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]:not([data-open-modal])').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
