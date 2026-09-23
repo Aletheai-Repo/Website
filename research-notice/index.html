@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--
+  Research data notice — public traces study.
+  Source of truth for the wording: Aletheai_Global/05_Legal_IP_Compliance/Aletheai_Legal_Research_Data_Notice_PublicTraces_v0.3_2026-09-23.md
+  Published 23 September 2026 · ICO ZC254306. The draft guard below is inert once both fields are filled.
+-->
+<title>Research data notice — Aletheai</title>
+<meta name="description" content="Notice for people whose public Wikipedia edits or Lichess games may be included in a Monomindai Ltd research study: what we use, how we protect it, and how to object." />
+<link rel="canonical" href="https://aletheai.ai/research-notice/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Research data notice — Aletheai" />
+<meta property="og:description" content="What we use from public Wikipedia and Lichess records, how we protect it, and how to object." />
+<meta property="og:url" content="https://aletheai.ai/research-notice/" />
+<link rel="icon" href="/aletheai-logo.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --brand-300:#AA8AFF;--brand-400:#8F66FF;--brand-500:#7B4EFF;--brand-600:#6A3BF0;--brand-700:#5829E0;
+  --cyan-500:#22D3EE;--cyan-dark:#0891B2;
+  --bg-0:#0B0E14;--bg-1:#101323;--surface:#14182A;--border:#1E2233;--border-strong:#2A3149;
+  --text-1:#E7E9F4;--text-2:#B4B9C7;--text-3:#7A8194;
+  --warning:#F59E0B;--link:#AA8AFF;
+  --aurora:linear-gradient(135deg,#8F66FF 0%,#22D3EE 100%);
+  --sans:'Inter',system-ui,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: light){
+  :root{--bg-0:#FAFAFB;--bg-1:#F4F4F8;--surface:#FFFFFF;--border:#E5E7EE;--border-strong:#CBD0DC;--text-1:#0B0E14;--text-2:#454A5C;--text-3:#6E7588;--link:#5829E0;--cyan-500:#0891B2}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg-0);color:var(--text-1);line-height:1.6;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--cyan-500)}
+.wrap{max-width:760px;margin:0 auto;padding:0 28px}
+@media(max-width:640px){.wrap{padding:0 16px}body{font-size:16px}}
+
+nav{border-bottom:1px solid var(--border);background:var(--bg-0)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.08em;font-size:14px;color:var(--text-1);text-decoration:none}
+.logo .mark{width:26px;height:26px;border-radius:50%;background:var(--brand-500);display:grid;place-items:center;color:#fff;font-size:13px;box-shadow:0 0 18px rgba(123,78,255,.35)}
+nav .back{font-size:14px;color:var(--text-2);text-decoration:none}
+nav .back:hover{color:var(--text-1)}
+
+.draft{display:none;background:rgba(245,158,11,.12);border-bottom:1px solid rgba(245,158,11,.5);color:var(--warning);font-size:14px;font-weight:600;padding:10px 0}
+.draft.on{display:block}
+
+header.top{padding:64px 0 32px;border-bottom:1px solid var(--border)}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--brand-300);display:block;margin-bottom:16px}
+h1{font-size:clamp(30px,4.5vw,44px);line-height:1.12;font-weight:700;letter-spacing:-.03em;max-width:700px}
+.meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--text-3)}
+.meta b{color:var(--text-2);font-weight:500}
+.meta .mono{font-family:var(--mono);font-size:13px}
+
+main{padding:16px 0 72px}
+section.block{padding:36px 0;border-bottom:1px solid var(--border)}
+section.block:last-of-type{border-bottom:none}
+h2{font-size:22px;line-height:1.3;font-weight:600;letter-spacing:-.02em;margin-bottom:14px}
+p{color:var(--text-2);margin-bottom:14px}
+p:last-child{margin-bottom:0}
+p b,li b{color:var(--text-1);font-weight:600}
+ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:4px}
+li{position:relative;padding-left:22px;color:var(--text-2)}
+li::before{content:"";position:absolute;left:0;top:.72em;width:9px;height:2px;background:var(--aurora);border-radius:2px}
+.contact{margin-top:18px;padding:16px 18px;border-radius:14px;background:var(--surface);border:1px solid var(--border);display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.contact span{color:var(--text-3);font-size:14px}
+.contact a{font-family:var(--mono);font-size:15px;font-weight:500}
+.rights li{padding:16px 18px 16px 34px;border-radius:14px;background:var(--surface);border:1px solid var(--border)}
+.rights li::before{left:16px;top:1.45em}
+.toc{margin:28px 0 0;padding:20px 22px;border-radius:14px;border:1px solid var(--border);background:var(--surface)}
+.toc .t{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+.toc ol{list-style:none;columns:2;column-gap:24px;font-size:14.5px}
+.toc ol li{padding:3px 0 3px 0;break-inside:avoid}
+.toc ol li::before{display:none}
+.toc a{text-decoration:none;color:var(--text-2)}
+.toc a:hover{color:var(--text-1)}
+@media(max-width:560px){.toc ol{columns:1}}
+
+footer{border-top:1px solid var(--border);padding:32px 0 48px;font-size:13px;color:var(--text-3)}
+footer .wrap{display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap}
+footer a{color:var(--text-3);text-decoration:none}
+footer a:hover{color:var(--text-1)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="https://aletheai.ai/"><span class="mark">A</span>ALETHEAI</a>
+    <a class="back" href="https://aletheai.ai/">aletheai.ai →</a>
+  </div>
+</nav>
+
+<div class="draft" id="draft"><div class="wrap">DRAFT — not yet published. The ICO registration number and publication date have not been filled in.</div></div>
+
+<header class="top">
+  <div class="wrap">
+    <span class="eyebrow">Research data notice</span>
+    <h1>Public records of Wikipedia edits and Lichess games</h1>
+    <div class="meta">
+      <span><b>Monomindai Ltd</b> (which runs Aletheai)</span>
+      <span>Version <b>1.0</b></span>
+      <span>Last updated <b id="pubdate" class="mono">23 September 2026</b></span>
+    </div>
+    <div class="toc">
+      <div class="t">On this page</div>
+      <ol>
+        <li><a href="#why">Why you are reading this</a></li>
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#purpose">What the study is for</a></li>
+        <li><a href="#what">What we use</a></li>
+        <li><a href="#protect">How we protect it</a></li>
+        <li><a href="#retain">How long we keep it</a></li>
+        <li><a href="#basis">Our legal basis</a></li>
+        <li><a href="#rights">Your rights</a></li>
+        <li><a href="#changes">Changes</a></li>
+      </ol>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="block" id="why">
+      <h2>Why you are reading this</h2>
+      <p>We are running a research study using two sets of records that their publishers make freely available to anyone: the edit history of Wikipedia and the Lichess open games database. If you have edited Wikipedia or played rated games on Lichess, records of what you did may be included.</p>
+      <p>We did not collect this information from you, and we have no way of contacting everyone it covers. The law allows a research project in that position to publish a notice instead of writing to each person. This page is that notice.</p>
+    </section>
+
+    <section class="block" id="who">
+      <h2>Who we are</h2>
+      <p>Monomindai Ltd, a company registered in England and Wales, company number 16207542. We are the controller for this research. Registered with the Information Commissioner's Office, registration number <b id="ico" class="mono">ZC254306</b>.</p>
+      <div class="contact"><span>Contact for anything on this page:</span><a href="mailto:diana@aletheai.ai">diana@aletheai.ai</a></div>
+    </section>
+
+    <section class="block" id="purpose">
+      <h2>What the study is for</h2>
+      <p>We are testing whether well-known patterns in how people make decisions can be measured in a consistent way from public records of what people actually did, in settings that have nothing to do with each other. Two examples: what editors do after someone undoes their edit, and whether chess players resign or play on when they are losing.</p>
+      <p>We are interested in patterns across large groups. We are not interested in any individual, and nothing in the study is about you as a person.</p>
+    </section>
+
+    <section class="block" id="what">
+      <h2>What we use</h2>
+      <p><b>From Wikipedia</b>, published by the Wikimedia Foundation: records of edits made on English Wikipedia between July 2024 and July 2025, and the edit history of Simple English Wikipedia. We use when an edit was made, whether and how quickly it was undone and by whom, the size of the change, the edit tags Wikipedia applies, and account information published with the edit: the account's numeric ID, how many edits it had made and when it was created, and whether it was flagged as a bot or blocked.</p>
+      <p>We do not read the text of any edit, edit summaries or page titles. Edits made without an account are removed as the files are read and never stored.</p>
+      <p><b>From Lichess</b>, published by the Lichess open database: rated games played in June 2024 and June 2025. We use the players' usernames, their ratings, the time control, the moves, the clock times and the result.</p>
+      <p>We do not use the Lichess website or its API, and we do not look at anyone's profile.</p>
+      <p>We do not collect or infer age, gender, location or any other personal characteristic, and we do not combine these records with each other or with any other information.</p>
+    </section>
+
+    <section class="block" id="protect">
+      <h2>How we protect it</h2>
+      <ul>
+        <li><b>Names are replaced with codes as the records are read.</b> A username or account ID becomes a code produced with a secret key. Each run uses a new key, and we destroy it when the run finishes, after which the codes cannot be traced back to anyone.</li>
+        <li><b>Results are statistics about groups.</b> We never report a figure about a group of fewer than 20 people. Where one number could be worked out by subtracting others, we hide that as well.</li>
+        <li><b>No usernames leave the study.</b> Before any result is written up, we run an automatic check that no username appears in it.</li>
+        <li><b>The files stay on one encrypted computer in the UK.</b> Nothing is sent to any other service, and we never try to identify anyone.</li>
+        <li><b>No decisions are made about anyone.</b> We do not profile individuals, contact anyone or use these records for marketing.</li>
+      </ul>
+    </section>
+
+    <section class="block" id="retain">
+      <h2>How long we keep it</h2>
+      <p>We keep our copy of the published files until 90 days after the study's results are finalised, and never longer than two years from when we downloaded them. Then we delete them. The group statistics contain no information about any individual, and we keep those.</p>
+    </section>
+
+    <section class="block" id="basis">
+      <h2>Our legal basis</h2>
+      <p>We rely on legitimate interests: carrying out research into how behaviour can be measured, using records their publishers chose to make public, with the safeguards above. We have written an assessment weighing that interest against your rights and expectations, and a data protection impact assessment. You can ask us for a summary of either.</p>
+    </section>
+
+    <section class="block" id="rights">
+      <h2>Your rights</h2>
+      <ul class="rights">
+        <li><b>You can object.</b> Email <a href="mailto:diana@aletheai.ai?subject=Objection%20%E2%80%94%20research%20data%20notice">diana@aletheai.ai</a> with your Wikipedia or Lichess username. If we receive it before the study's main analysis begins, we will exclude every record of your account from it; if it arrives later, we will exclude your account from any further analysis. We will use your username only to do that, and we will keep it only as a code made with the same kind of secret key.</li>
+        <li><b>After a run has finished,</b> its key is destroyed, and the results contain nothing about you as an individual. From then on we have nothing we could look up, correct or delete about you, except the published files themselves until we delete them as described above.</li>
+        <li><b>You can complain</b> to the Information Commissioner's Office at <a href="https://ico.org.uk" rel="noopener">ico.org.uk</a>. We would appreciate the chance to put things right first.</li>
+      </ul>
+    </section>
+
+    <section class="block" id="changes">
+      <h2>Changes</h2>
+      <p>If we change how we use these records, we will update this page and the date at the top before the change takes effect.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Monomindai Ltd · Company 16207542 · England and Wales</span>
+    <span><a href="https://aletheai.ai/">aletheai.ai</a> · <a href="mailto:diana@aletheai.ai">diana@aletheai.ai</a></span>
+  </div>
+</footer>
+
+<script>
+/* Draft guard: while either placeholder is unfilled, show the banner and block indexing. Remove nothing here — fill the two FILL-ME values above and this switches itself off. */
+(function(){
+  var ico=document.getElementById('ico').textContent.trim();
+  var d=document.getElementById('pubdate').textContent.trim();
+  var unfilled=ico.indexOf('FILL-ME')===0||d.indexOf('FILL-ME')===0;
+  if(unfilled){
+    document.getElementById('draft').classList.add('on');
+    var m=document.createElement('meta');m.name='robots';m.content='noindex';document.head.appendChild(m);
+  }
+})();
+</script>
+</body>
+</html>
