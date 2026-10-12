@@ -74,6 +74,9 @@ nav .btn{padding:9px 16px;font-size:14px}
 .hero p.lead{max-width:640px;margin:28px 0 36px}
 .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .hero .ctas .note{font-size:13px;color:var(--text-3)}
+.hero .trio{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--brand-300)}
+.hero .trio span+span::before{content:"·";margin-right:14px;color:var(--text-3)}
+.hero .tagline{margin-top:14px;font-family:"Instrument Serif",serif;font-style:italic;font-size:22px;color:var(--text-2)}
 .hero .line{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);display:flex;gap:28px;flex-wrap:wrap;font-size:13px;color:var(--text-3)}
 
 .problem{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:start}
@@ -219,30 +222,21 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
 <header class="hero">
   <div class="wrap">
     <span class="eyebrow">Agent conduct · Decision evidence</span>
-    <h1>Your AI is already making decisions. Can you defend them?</h1>
+    <h1>Stop guessing what to do next.</h1>
+    <div class="trio"><span>Behavioural intelligence</span><span>Data diagnostics</span><span>Explainable decisions</span></div>
+    <p class="tagline">Every decision explained. Every answer earned.</p>
     <p class="lead">Aletheai makes machine decisions defensible: to your board, your regulator, and the person on the other end. Every action rests on evidence. Every piece of evidence has a record.</p>
     <div class="ctas">
       <a class="btn primary" href="#access">Request access →</a>
       <span class="note">Shown under NDA. Nothing here is a demo.</span>
     </div>
     <div class="line">
-      <span>Patents pending · UK and PCT</span>
+      <span>Patents pending</span>
       <span>Built in the UK</span>
       <span>Two products, one standard</span>
     </div>
   </div>
 </header>
-
-<section id="proof" class="rule">
-  <div class="wrap">
-    <div class="proof">
-      <div class="p rv"><div class="num">85%</div><div class="lab">of those using AI agents say some systems act with no human involved in real time.</div></div>
-      <div class="p rv"><div class="num">47%</div><div class="lab">of senior AI executives say their organisation has skipped its own AI governance process for an urgent deployment.</div></div>
-      <div class="p rv"><div class="num">26%</div><div class="lab">of those using AI agents say they cannot detect unauthorised agents running inside their own business.</div></div>
-    </div>
-    <span class="src rv">Source: EY, senior AI executives at US public companies over $1bn revenue, September 2026.</span>
-  </div>
-</section>
 
 <section id="problem">
   <div class="wrap">
@@ -255,7 +249,7 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
         <p>Last year, AI wrote the email. This year, it sends it. It approves the refund, moves the money, changes the record, deletes the file.</p>
         <p>And when it goes wrong, someone will ask the only question that matters: <b>why was it allowed to do that?</b></p>
         <p>Few organisations can answer today. They have a policy, but no control. They have logs, but no reasons.</p>
-        <p>This year, by its owner's account, an AI agent deleted a company's production database and its backups. Asked why, it said it had guessed.</p>
+        <p>This year, as TechRepublic reported, an AI agent deleted a company's production database and its backups, by its owner's account. Asked why, it said it had guessed.</p>
         <p><b>Guessing is not a governance model.</b></p>
       </div>
     </div>
@@ -268,8 +262,6 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
       <span class="eyebrow">The shift</span>
       <h2>The question is no longer “is it accurate?” It's “can you stand behind it?”</h2>
       <p>Prediction is cheap now. Every model can produce an answer. Few can produce an answer you could defend under questioning: what was known, what wasn't, and why it acted anyway.</p>
-      <p>Nearly half of planned AI investment is on hold, and leaders name explainability and transparency among the barriers. The technology didn't fail. Nobody could sign it off.</p>
-      <span class="src">Gong / Censuswide, business leaders at UK and US medium and large businesses, fielded January 2026, published April 2026: 46% of planned AI investment paused.</span>
       <div class="pull rv">Trust is not a feeling. It's a record.</div>
     </div>
   </div>
@@ -322,21 +314,21 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow">The clock</span>
-      <h2>Regulation has a date. Your board has a question.</h2>
+      <h2>Regulation is on the clock. Your board has a question.</h2>
     </div>
     <div class="clock">
-      <div class="d rv"><div class="when">Since August 2026</div><p>EU AI Act transparency duties apply.</p></div>
-      <div class="d rv"><div class="when">December 2027</div><p>Rules for the Act's high-risk list — credit, hiring and education among them — are set, under the Digital Omnibus now in force.</p></div>
+      <div class="d rv"><div class="when">In force</div><p>EU AI Act transparency duties already apply.</p></div>
+      <div class="d rv"><div class="when">Dated</div><p>Rules for the Act's high-risk list — credit, hiring and education among them — carry an application date set by the Digital Omnibus, now in force.</p></div>
     </div>
     <p class="rv" style="margin-top:22px;color:var(--text-2);font-size:17px">You can build the evidence now, calmly. Or reconstruct it later, under pressure.</p>
-    <span class="src rv">EU AI Act, Regulation (EU) 2024/1689, as amended by the Digital Omnibus; dates per the amended text, checked October 2026.</span>
+    <span class="src rv">EU AI Act, as amended by the Digital Omnibus; checked October 2026.</span>
   </div>
 </section>
 
 <section id="cred" class="rule">
   <div class="wrap">
     <div class="cred rv">
-      <span><b>Patents pending</b> · UK and PCT applications</span>
+      <span><b>Patents pending</b></span>
       <span>Backed by <b>RTC North</b></span>
       <span>Feasibility study with the <b>STFC Hartree Centre</b></span>
       <span>London and Madrid</span>
