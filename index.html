@@ -11,7 +11,11 @@
 <meta property="og:title" content="Aletheai — Defensible AI for decisions that matter" />
 <meta property="og:description" content="Your AI is already acting. Aletheai makes machine decisions defensible to your board, your regulator and the person they affect." />
 <meta property="og:url" content="https://aletheai.ai/" />
-<link rel="icon" href="/aletheai-logo.png" type="image/png" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#0B0E14" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
@@ -56,7 +60,7 @@ section{padding:96px 0}
 nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(11,14,20,.72);border-bottom:1px solid var(--border)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.08em;font-size:14px}
-.logo .mark{width:26px;height:26px;border-radius:50%;background:var(--brand-500);display:grid;place-items:center;color:#fff;font-size:13px;box-shadow:0 0 18px rgba(123,78,255,.45)}
+.logo .mark{width:26px;height:26px;display:block;object-fit:contain;filter:drop-shadow(0 0 10px rgba(123,78,255,.45))}
 .logo .tm{font-size:9px;vertical-align:top;margin-left:2px;color:var(--text-3);letter-spacing:0}
 .logo .tag{margin-left:8px;padding:3px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-strong);font-size:11px;letter-spacing:.12em;color:var(--brand-300);font-weight:500}
 nav .right{display:flex;align-items:center;gap:18px;font-size:14px;color:var(--text-2)}
@@ -87,6 +91,7 @@ blockquote.big span{background:var(--aurora);-webkit-background-clip:text;backgr
 .prose p:first-child{margin-top:0}
 .prose p b{color:var(--text-1);font-weight:600}
 
+.vid{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;margin-top:40px;border-radius:20px;border:1px solid var(--border);background:var(--bg-1)}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:860px){.three{grid-template-columns:1fr}}
 .card{padding:26px;border-radius:16px;background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden}
@@ -121,7 +126,7 @@ blockquote.big span{background:var(--aurora);-webkit-background-clip:text;backgr
 .doc .h span{font-family:var(--mono);font-size:11px;color:var(--text-3)}
 .doc .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13.5px;color:var(--text-2)}
 .doc .row:last-child{border-bottom:none}
-.doc .row em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--text-3)}
+.doc .row em{flex:0 0 auto;max-width:38%;text-align:right;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--text-3)}
 .doc .row.dim{color:var(--text-3)}
 
 .integ{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
@@ -207,7 +212,7 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
 
 <nav>
   <div class="wrap">
-    <a class="logo" href="/"><span class="mark">A</span>ALETHEAI<span class="tm">™</span></a>
+    <a class="logo" href="/"><img class="mark" src="/assets/aletheai-mark.png" alt="" width="26" height="26" />ALETHEAI<span class="tm">™</span></a>
     <div class="links">
       <a href="/conduct/">Conduct</a>
       <a href="/behaviour/">Behaviour</a>

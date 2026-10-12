@@ -11,7 +11,11 @@
 <meta property="og:title" content="Aletheai RE — Know which enquiries are worth calling" />
 <meta property="og:description" content="Who to call, why, and what to say — from the enquiries you've already paid for." />
 <meta property="og:url" content="https://aletheai.ai/behaviour/real-estate/" />
-<link rel="icon" href="/aletheai-logo.png" type="image/png" />
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+<meta name="theme-color" content="#0B0E14" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
@@ -56,7 +60,7 @@ section{padding:96px 0}
 nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(12px);background:rgba(11,14,20,.72);border-bottom:1px solid var(--border)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.08em;font-size:14px}
-.logo .mark{width:26px;height:26px;border-radius:50%;background:var(--brand-500);display:grid;place-items:center;color:#fff;font-size:13px;box-shadow:0 0 18px rgba(123,78,255,.45)}
+.logo .mark{width:26px;height:26px;display:block;object-fit:contain;filter:drop-shadow(0 0 10px rgba(123,78,255,.45))}
 .logo .tm{font-size:9px;vertical-align:top;margin-left:2px;color:var(--text-3);letter-spacing:0}
 .logo .tag{margin-left:8px;padding:3px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border-strong);font-size:11px;letter-spacing:.12em;color:var(--brand-300);font-weight:500}
 nav .right{display:flex;align-items:center;gap:18px;font-size:14px;color:var(--text-2)}
@@ -87,6 +91,7 @@ blockquote.big span{background:var(--aurora);-webkit-background-clip:text;backgr
 .prose p:first-child{margin-top:0}
 .prose p b{color:var(--text-1);font-weight:600}
 
+.vid{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;margin-top:40px;border-radius:20px;border:1px solid var(--border);background:var(--bg-1)}
 .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:860px){.three{grid-template-columns:1fr}}
 .card{padding:26px;border-radius:16px;background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden}
@@ -121,7 +126,7 @@ blockquote.big span{background:var(--aurora);-webkit-background-clip:text;backgr
 .doc .h span{font-family:var(--mono);font-size:11px;color:var(--text-3)}
 .doc .row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:13.5px;color:var(--text-2)}
 .doc .row:last-child{border-bottom:none}
-.doc .row em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--text-3)}
+.doc .row em{flex:0 0 auto;max-width:38%;text-align:right;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--text-3)}
 .doc .row.dim{color:var(--text-3)}
 
 .integ{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
@@ -207,13 +212,14 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
 
 <nav>
   <div class="wrap">
-    <a class="logo" href="/"><span class="mark">A</span>ALETHEAI<span class="tm">™</span><span class="tag">RE</span></a>
+    <a class="logo" href="/"><img class="mark" src="/assets/aletheai-mark.png" alt="" width="26" height="26" />ALETHEAI<span class="tm">™</span><span class="tag">RE</span></a>
     <div class="links">
       <a href="/conduct/">Conduct</a>
       <a href="/behaviour/">Behaviour</a>
       <a class="on" href="/behaviour/real-estate/">Real estate</a>
     </div>
     <div class="right">
+      <a class="btn ghost" href="https://aletheaiv2-frontend-production.up.railway.app/" rel="noopener">Sign in</a>
       <a class="btn primary" href="#access">Request access</a>
     </div>
   </div>
@@ -226,6 +232,7 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
     <p class="lead">Aletheai RE tells every negotiator which enquiries are worth their time today, why, and what to say, so your agency wins more instructions from the enquiries it has already paid for.</p>
     <div class="ctas">
       <a class="btn primary" href="#access">Request access →</a>
+      <a class="btn ghost" href="https://aletheaiv2-frontend-production.up.railway.app/" rel="noopener">Existing user? Open Aletheai RE →</a>
       <span class="note">Works from your CRM or a simple export.</span>
     </div>
     <div class="line">
@@ -243,9 +250,16 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
         <blockquote class="big">Portal fees went up. <span>Your hit rate didn't.</span></blockquote>
       </div>
       <div class="prose rv">
-        <p>You pay for every enquiry. Your team gets more of them than it has time to call, and picks by gut.</p>
-        <p>The vendor who would have listed this week rings another agent on Thursday. You'll never know which one it was.</p>
+        <p>You pay for every enquiry. Your team gets more of them than it has time to call, and picks by gut. The vendor who would have listed this week rings another agent on Thursday. You'll never know which one it was.</p>
+        <p><b>Your CRM stores the data. It doesn't tell anyone what to do with it.</b></p>
       </div>
+    </div>
+    <video class="vid rv" autoplay muted loop playsinline preload="metadata" aria-label="A typical CRM enquiry list: every row looks the same" src="/assets/aletheai-crm-problem.mp4"></video>
+    <span class="src rv">Illustrative: a mock CRM list. No real customers, no real data.</span>
+    <div class="three" style="margin-top:28px">
+      <div class="card rv"><div class="n">I</div><h3>Calling the wrong enquiries.</h3><p>Volume is high, signal is low. Negotiators prioritise by gut, not by what the enquiry has done. The warm ones go cold while the cold ones get the call.</p></div>
+      <div class="card rv"><div class="n">II</div><h3>Missing the right moment.</h3><p>The window between "interested" and "ready" is short and quiet. By the time someone asks again, another agency has already replied.</p></div>
+      <div class="card rv"><div class="n">III</div><h3>Not knowing what to say.</h3><p>Even with the right enquiry at the right time, the wrong opener kills the conversation. The opener has to come from what the person did.</p></div>
     </div>
   </div>
 </section>
@@ -267,6 +281,51 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
   </div>
 </section>
 
+<section id="how" class="rule">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">How it works</span>
+      <h2>Not a black box. Plain logic you can read.</h2>
+      <p>Aletheai RE sits on top of the CRM you already use and turns what it records into a short, explained list. Three steps, each one visible.</p>
+    </div>
+    <div class="three">
+      <div class="card rv"><div class="n">SIGNALS</div><h3>What the enquiry did.</h3><p>Returned to a listing. Booked a viewing and never confirmed it. A mortgage decision in principle arrived. Search criteria moved. Days of silence. Your CRM already records these; it just doesn't act on them.</p></div>
+      <div class="card rv"><div class="n">PATTERNS</div><h3>What that usually means.</h3><p>Signals are read as patterns a negotiator would recognise. Each one is a reason you can say out loud, not a probability.</p></div>
+      <div class="card rv"><div class="n">DECISIONS</div><h3>Who, why, what next.</h3><p>Patterns become decisions through logic you can read. The output is a ranked list with the reason written on every entry, so when a manager asks "why this one?" there is a straight answer.</p></div>
+    </div>
+    <div class="flow rv" style="margin-top:28px" aria-label="Signals to patterns to decisions">
+      <div class="line"><span class="box">your CRM, or an export</span><span class="arr">→</span><span class="box">signals · what each enquiry did</span><span class="arr">→</span><span class="box">patterns · what the signals add up to</span><span class="arr">→</span><span class="box c">Aletheai RE · who, why, what next</span></div>
+      <div class="sub">every entry on the list traces back to something the person did</div>
+    </div>
+  </div>
+</section>
+
+<section id="morning" class="rule">
+  <div class="wrap">
+    <div class="report">
+      <div class="rv">
+        <span class="eyebrow">What a morning looks like</span>
+        <h2 style="margin-top:14px">A short list. A reason on every line.</h2>
+        <ul>
+          <li><b>Not the newest enquiries</b> — the ones worth the call today.</li>
+          <li><b>The reason in one line</b>, in words a negotiator would use.</li>
+          <li><b>The next step</b> — the opener, the framing, the ask.</li>
+          <li><b>And when the evidence isn't there</b>, it says so rather than guessing.</li>
+        </ul>
+        <p style="margin-top:18px;color:var(--text-2)">No scores dressed up as certainty. Nothing to configure before the first list.</p>
+      </div>
+      <div class="doc rv" aria-label="Illustrative morning list">
+        <div class="h"><b>Today's list</b><span>illustrative · not customer data · not measured results</span></div>
+        <div class="row"><span>Camden two-bed · returned to the listing more than once since yesterday, viewing booked but unconfirmed</span><em>confirm the viewing</em></div>
+        <div class="row"><span>Islington flat · mortgage decision in principle just received</span><em>send a shortlist</em></div>
+        <div class="row"><span>Hackney studio · opened every email, no callback for days</span><em>call today</em></div>
+        <div class="row"><span>Stoke Newington · search criteria moved upward</span><em>reframe the budget</em></div>
+        <div class="row dim"><span>Walthamstow · too little recent activity to rank</span><em>not ranked — says why</em></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="trust" class="rule">
   <div class="wrap">
     <div class="sec-head rv">
@@ -278,6 +337,22 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
       <div class="c rv"><b>We don't pretend.</b><p>No made-up scores dressed up as certainty.</p></div>
       <div class="c rv"><b>It doesn't change your day.</b><p>Works from your CRM or a simple export.</p></div>
       <div class="c rv"><b>It doesn't add admin.</b><p>One list. One reason. One next step.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="yourdata" class="rule">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">On your own data</span>
+      <h2>Run it on your pipeline. Judge it on your outcomes.</h2>
+      <p>We don't ask you to take our word for it. We ask you to measure.</p>
+    </div>
+    <div class="commit">
+      <div class="c rv"><div class="n">I</div><b>Set a baseline.</b><p>Your current numbers, before anything changes.</p></div>
+      <div class="c rv"><div class="n">II</div><b>Roll out to a few negotiators.</b><p>The morning list, from your CRM or an export.</p></div>
+      <div class="c rv"><div class="n">III</div><b>Compare against your baseline weekly.</b><p>In plain language, on your own numbers.</p></div>
+      <div class="c rv"><div class="n">IV</div><b>Decide.</b><p>Extend, expand, or stop. Your call, on your evidence.</p></div>
     </div>
   </div>
 </section>
@@ -305,6 +380,7 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
         <h2 style="margin-top:14px">Every morning, know who to call first.</h2>
         <p>Tell us which CRM you use and roughly how many live enquiries you hold. We'll come back with what the first week looks like.</p>
         <a class="btn primary" href="mailto:diana@aletheai.ai?subject=Access%20request%20%E2%80%94%20Aletheai%20RE">Request access →</a>
+        <a class="btn ghost" href="https://aletheaiv2-frontend-production.up.railway.app/" rel="noopener">Existing user? Sign in →</a>
         <div class="note">Diana Simpson Hernandez, CEO · diana@aletheai.ai</div>
       </div>
     </div>
