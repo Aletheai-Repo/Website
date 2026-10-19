@@ -159,6 +159,52 @@ footer a:hover{color:var(--text-1)}
 .rv{opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s}
 .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* flow diagram */
+.dflow{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:16px;align-items:stretch}
+@media(max-width:900px){.dflow{grid-template-columns:1fr}}
+.fp{padding:22px;border-radius:16px;background:var(--surface);border:1px solid var(--border);position:relative}
+.fp.after{border-color:var(--border-strong)}
+.fh{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.pat{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brand-300);padding:4px 10px;border-radius:999px;border:1px solid var(--border-strong)}
+.frow{display:flex;align-items:center;gap:0}
+.frec{display:flex;align-items:center;gap:0;margin-top:16px;padding-top:16px;border-top:1px dashed var(--border-strong)}
+.fcol{display:flex;flex-direction:column;gap:10px;flex:1 1 0;min-width:0}
+.fb{flex:1 1 0;min-width:0;padding:14px 16px;border-radius:12px;background:var(--bg-1);border:1px solid var(--border-strong);font-size:13.5px;color:var(--text-2)}
+.fb b{display:block;color:var(--text-1);font-size:14.5px;margin-bottom:3px}
+.fb em{display:block;font-style:normal;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.fb span{display:block}
+.fb ul{margin:10px 0 0;padding-left:18px}
+.fb li{margin:4px 0;font-size:13px}
+.fb.gate{flex:1.35 1 0;background:var(--surface-2);border-color:var(--brand-400);box-shadow:0 0 0 1px rgba(143,102,255,.25),0 0 32px rgba(123,78,255,.18)}
+.fb.gate b{color:var(--brand-300)}
+.fb.end{border-style:solid;position:relative}
+.fb.end::after{content:"";position:absolute;right:14px;bottom:14px;width:10px;height:10px;background:var(--text-3);border-radius:2px}
+.fb.recb,.fb.rep{background:var(--surface)}
+.fx{padding:10px 12px;border-radius:10px;border:1px dashed var(--border-strong);font-size:12.5px;color:var(--text-3);opacity:.8}
+.fx span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:3px}
+.fa{flex:0 0 28px;height:1px;background:var(--border-strong);position:relative;margin:0 2px}
+.fa::after{content:"";position:absolute;right:-1px;top:-4px;border:4px solid transparent;border-left:6px solid var(--text-3)}
+.fa.split::before{content:"";position:absolute;right:0;top:-24px;height:48px;width:1px;background:var(--border-strong)}
+.fnote{margin-top:14px;font-size:13.5px;color:var(--text-2)}
+.fnote b{color:var(--text-1);font-weight:600}
+.fcap{margin-top:14px;font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:22px;color:var(--text-1)}
+@media(max-width:620px){.frow,.frec{flex-direction:column;align-items:stretch}.fa{flex:0 0 1px;width:1px;height:22px;margin:0 auto;background:var(--border-strong)}.fa::after{right:-4px;top:auto;bottom:-1px;border:4px solid transparent;border-top:6px solid var(--text-3)}.fa.split::before{display:none}.fcol{width:100%}}
+.effects{margin:28px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.effects li{position:relative;padding-left:18px;font-size:15.5px;color:var(--text-1)}
+.effects li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:8px;border-radius:50%;background:var(--brand-400)}
+@media(max-width:620px){.effects{grid-template-columns:1fr}}
+.cmp{margin-top:32px;border:1px solid var(--border);border-radius:14px;overflow:hidden;font-size:14px}
+.cr{display:grid;grid-template-columns:90px repeat(4,minmax(0,1fr));border-top:1px solid var(--border)}
+.cr:first-child{border-top:none}
+.cr>div{padding:13px 14px;color:var(--text-2);border-left:1px solid var(--border)}
+.cr>div:first-child{border-left:none;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);align-self:center}
+.cr.head>div{font-weight:600;color:var(--text-1);background:var(--surface)}
+.cr>div.us{background:rgba(123,78,255,.08);color:var(--text-1)}
+.cr.head>div.us{color:var(--brand-300)}
+.cr i{font-style:italic;color:inherit}
+@media(max-width:760px){.cmp{overflow-x:auto}.cr{grid-template-columns:80px repeat(4,minmax(150px,1fr))}}
+.cfoot{margin-top:14px;font-size:14px;color:var(--text-3)}
 </style>
 </head>
 <body>
@@ -222,6 +268,65 @@ footer a:hover{color:var(--text-1)}
       <div class="card rv"><div class="n">II</div><h3>The act is registered before it happens.</h3><p>The act goes on the record first, so the record can never be a story written afterwards.</p></div>
       <div class="card rv"><div class="n">III</div><h3>The act must be justified by evidence the agent did not write.</h3><p>What an agent says about its own request is not evidence. The justification has to come from evidence the agent did not write.</p></div>
     </div>
+  </div>
+</section>
+
+<section id="flow" class="rule">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow">How the flow changes</span>
+      <h2>Agents may act. They may not commit.</h2>
+      <p>What changes when your agents go through Aletheai Conduct, and why that is different from permissions, filters and logs.</p>
+    </div>
+
+    <div class="dflow rv">
+      <div class="fp before">
+        <div class="fh"><span class="eyebrow">Before · today</span></div>
+        <div class="frow">
+          <div class="fb"><b>Agent</b><span>Holds the keys.</span></div>
+          <div class="fa" aria-hidden="true"></div>
+          <div class="fb"><b>Your systems</b><span>Email · CRM · payments · repositories</span></div>
+        </div>
+        <div class="fnote"><b>Afterwards:</b> the agent's own account of what it did.</div>
+        <div class="fcap">You have their word for it.</div>
+      </div>
+
+      <div class="fp after">
+        <div class="fh"><span class="eyebrow">After · with Aletheai Conduct</span><span class="pat">Patent pending.</span></div>
+        <div class="frow">
+          <div class="fcol">
+            <div class="fb"><b>Agent</b><span>Asks to act. It no longer holds the keys.</span></div>
+            <div class="fx"><span>Its explanation</span>Not an input to the decision. An explanation is not evidence.</div>
+          </div>
+          <div class="fa" aria-hidden="true"></div>
+          <div class="fb gate"><b>Aletheai Conduct</b><span>A gate the agent cannot reach.</span><ul><li>The act is registered before it happens.</li><li>The act must be justified by evidence the agent did not write.</li></ul></div>
+          <div class="fa split" aria-hidden="true"></div>
+          <div class="fcol exits">
+            <div class="fb ok"><em>Justified</em><b>Your systems</b><span>The act happens. The outcome is recorded.</span></div>
+            <div class="fb end"><em>Not justified</em><b>Held</b><span>Nothing is sent. The refusal is recorded. The flow ends here.</span></div>
+          </div>
+        </div>
+        <div class="frec">
+          <div class="fb recb"><b>The record</b><span>Every act, every refusal, and the evidence each rested on. Written before the act, not after.</span></div>
+          <div class="fa" aria-hidden="true"></div>
+          <div class="fb rep"><b>The Assurance Report</b><span>For boards, risk and compliance, and insurers.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="effects rv">
+      <li>Every act passes a gate the agent cannot reach.</li>
+      <li>The act is registered before it happens.</li>
+      <li>The act must be justified by evidence the agent did not write.</li>
+      <li>Refusals are recorded. The gate itself uses no model: deterministic and replayable.</li>
+    </ul>
+
+    <div class="cmp rv" role="table" aria-label="How it compares">
+      <div class="cr head" role="row"><div role="columnheader"></div><div role="columnheader">Permissions</div><div role="columnheader">Content filters</div><div role="columnheader">Logs</div><div role="columnheader" class="us">Aletheai Conduct</div></div>
+      <div class="cr" role="row"><div role="rowheader">Asks</div><div role="cell"><i>May this agent do this kind of thing?</i></div><div role="cell"><i>Do the words look risky?</i></div><div role="cell"><i>What happened?</i></div><div role="cell" class="us"><i>What evidence justifies this act, now?</i></div></div>
+      <div class="cr" role="row"><div role="rowheader">When</div><div role="cell">Set once, in advance</div><div role="cell">On the words</div><div role="cell">After the fact</div><div role="cell" class="us">Before the act</div></div>
+    </div>
+    <p class="cfoot rv">An agent fully permitted to send that email is still held if nothing it can point to justifies it.</p>
   </div>
 </section>
 
