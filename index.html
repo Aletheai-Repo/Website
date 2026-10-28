@@ -204,6 +204,24 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
 .faq .q p{font-size:15px;color:var(--text-2)}
 .legal{font-size:12px;color:var(--text-3);margin-top:10px}
 
+
+/* access request form (shared) */
+.aform{text-align:left;margin:8px auto 0;max-width:560px;display:flex;flex-direction:column;gap:14px}
+.aform [hidden]{display:none!important}
+.aform .row.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.aform .row.two{grid-template-columns:1fr}}
+.aform label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:500;color:var(--text-2)}
+.aform input,.aform select,.aform textarea{font:inherit;font-size:15px;color:var(--text-1);background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;padding:11px 12px;width:100%}
+.aform textarea{resize:vertical;min-height:96px}
+.aform input:focus,.aform select:focus,.aform textarea:focus{outline:2px solid var(--brand-400);outline-offset:1px;border-color:transparent}
+.aform button[type=submit]{align-self:flex-start;margin-top:4px}
+.aform button[disabled]{opacity:.6;cursor:wait}
+.aform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.aform .fine{font-size:12.5px;color:var(--text-3);margin:0}
+.aform .ok{padding:14px 16px;border-radius:12px;border:1px solid var(--brand-400);color:var(--text-1);margin:0}
+.aform .err,.aform .miss{padding:12px 14px;border-radius:12px;border:1px solid var(--warning);color:var(--text-1);margin:0;font-size:14px}
+.aform .err a{color:var(--brand-300);text-decoration:underline}
+.aform .copy{margin-left:8px;font:inherit;font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--border-strong);background:transparent;color:var(--text-2);cursor:pointer}
 </style>
 </head>
 <body>
@@ -349,7 +367,61 @@ nav .links a:hover,nav .links a.on{color:var(--text-1)}
         <span class="eyebrow">The evidence room</span>
         <h2 style="margin-top:14px">Your AI will make a mistake. The question is whether you can explain it.</h2>
         <p>Request access to our evidence room. We'll show you what a defensible decision looks like.</p>
-        <a class="btn primary" href="mailto:diana@aletheai.ai?subject=Evidence%20room%20access%20%E2%80%94%20Aletheai">Request access →</a>
+        <form class="aform" id="aform" action="https://formspree.io/f/meaaknpq" method="POST" novalidate>
+  <input type="hidden" name="_subject" value="Access request · Aletheai · landing page" />
+  <input type="hidden" name="page" value="Aletheai · landing page" />
+  <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+  <div class="row two">
+    <label>Your name <span class="rq">(required)</span><input type="text" name="name" autocomplete="name" required aria-required="true" /></label>
+    <label>Work email <span class="rq">(required)</span><input type="email" name="email" autocomplete="email" required aria-required="true" /></label>
+  </div>
+  <div class="row two">
+    <label>Organisation <span class="rq">(required)</span><input type="text" name="organisation" autocomplete="organization" required aria-required="true" /></label>
+    <label>Your role <span class="rq">(optional)</span><input type="text" name="role" autocomplete="organization-title" /></label>
+  </div>
+  <label>What you are asking about
+    <select name="access">
+      <option value="Aletheai Conduct" selected>Aletheai Conduct</option>
+      <option value="Aletheai Behaviour">Aletheai Behaviour</option>
+      <option value="Aletheai Behaviour · real estate (an account for your agency)">Aletheai Behaviour · real estate (an account for your agency)</option>
+      <option value="Something else">Something else</option>
+    </select>
+  </label>
+  <label>What would you like to look at, and why? <span class="rq">(optional)</span><textarea name="message" rows="4" placeholder="A line on who you are and the decisions your team makes."></textarea></label>
+  <button type="submit" class="btn primary">Send request →</button>
+  <p class="fine">We use these details only to reply to you and to arrange access. They reach us through Formspree, our form service. Confidential material is shown only after an NDA is signed.</p>
+  <p class="ok" role="status" tabindex="-1" hidden>Thank you, your request has been sent. We'll reply from diana@aletheai.ai.</p>
+  <p class="err" role="alert" hidden>That didn't send. Please email <a href="mailto:diana@aletheai.ai">diana@aletheai.ai</a> <button type="button" class="copy">Copy address</button></p>
+  <p class="miss" role="alert" hidden></p>
+</form>
+<script>
+(function(){
+  var f=document.getElementById('aform'); if(!f||!window.fetch) return;
+  var ok=f.querySelector('.ok'), err=f.querySelector('.err'), miss=f.querySelector('.miss'), btn=f.querySelector('button[type=submit]');
+  var names={name:'your name',email:'a work email',organisation:'your organisation'};
+  var cp=f.querySelector('.copy');
+  if(cp) cp.addEventListener('click',function(){
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText('diana@aletheai.ai').then(function(){cp.textContent='Copied';},function(){cp.textContent='Select and copy the address';}); }
+    else { cp.textContent='Select and copy the address'; }
+  });
+  f.addEventListener('input',function(e){ if(e.target&&e.target.getAttribute) e.target.removeAttribute('aria-invalid'); miss.hidden=true; err.hidden=true; });
+  f.addEventListener('submit',function(e){
+    e.preventDefault(); ok.hidden=true; err.hidden=true; miss.hidden=true;
+    var bad=[], first=null;
+    ['name','email','organisation'].forEach(function(n){ var el=f.elements[n]; el.removeAttribute('aria-invalid'); if(!el.checkValidity()){ el.setAttribute('aria-invalid','true'); if(!first) first=el; bad.push(n); } });
+    if(bad.length){
+      var emailOnly = bad.length===1 && bad[0]==='email' && f.elements.email.value;
+      miss.textContent = emailOnly ? 'Please check the email address.' : 'Please add ' + (function(l){ return l.length<2 ? l[0] : l.slice(0,-1).join(', ') + ' and ' + l[l.length-1]; })(bad.map(function(n){return names[n];})) + '.';
+      miss.hidden=false; first.focus(); return;
+    }
+    btn.disabled=true; var label=btn.textContent; btn.textContent='Sending…';
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      .then(function(r){ if(!r.ok) throw new Error('status'); f.reset(); Array.prototype.forEach.call(f.querySelectorAll('.row,label,button[type=submit],.fine'),function(el){el.hidden=true;}); ok.hidden=false; ok.focus(); })
+      .catch(function(){ err.hidden=false; btn.disabled=false; btn.textContent=label; });
+  });
+})();
+</script>
+
         <div class="note">Diana Simpson Hernandez, CEO · diana@aletheai.ai</div>
       </div>
     </div>
